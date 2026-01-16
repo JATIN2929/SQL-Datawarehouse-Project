@@ -198,8 +198,10 @@ CASE
     ELSE bdate
 END AS bdate,
 CASE 
-    WHEN UPPER(TRIM(gen)) IN ('M','MALE') THEN 'Male'
-    WHEN UPPER(TRIM(gen)) IN ('F','FEMALE') THEN 'Female'
+    WHEN SUBSTRING(UPPER(TRIM(gen)), 1, 1) = 'M' THEN 'Male'
+    WHEN SUBSTRING(UPPER(TRIM(gen)), 1, 1) = 'F' THEN 'Female'
+    WHEN SUBSTRING(UPPER(TRIM(gen)), 1, 6) = 'FEMALE' THEN 'Female'
+    WHEN SUBSTRING(UPPER(TRIM(gen)), 1, 4) = 'MALE' THEN 'Male' 
     ELSE 'Unknown'
 END AS gen
 FROM bronze.erp_cust_az12
@@ -286,4 +288,3 @@ SELECT * FROM silver.crm_sales_details;
 SELECT * FROM silver.erp_loc_a101;
 SELECT * FROM silver.erp_px_cat_g1v2;
 SELECT * FROM silver.erp_cust_az12;
-
